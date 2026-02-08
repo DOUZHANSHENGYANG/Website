@@ -193,6 +193,7 @@ npm run build
 - `VERCEL_PROJECT_ID`
 
 配置后，每次 push 到 `main` 并命中 `frontend/**` 变更会自动发布到 Vercel 生产环境。
+如果 Secrets 未配置，工作流会自动跳过，不会导致 CI 失败。
 
 ---
 
