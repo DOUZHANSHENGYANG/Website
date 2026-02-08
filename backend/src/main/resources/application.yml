@@ -1,0 +1,44 @@
+server:
+  port: 9002
+
+spring:
+  datasource:
+    url: jdbc:sqlite:${BLOG_DB_PATH:./blog.db}
+    driver-class-name: org.sqlite.JDBC
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      table-underline: true
+
+logging:
+  level:
+    com.liquidthoughts.blog: info
+
+app:
+  jwt:
+    secret: liquid-thoughts-jwt-signing-secret-2026-very-secure-key
+    expire-minutes: 720
+  storage:
+    root-path: ${BLOG_STORAGE_PATH:./storage}
+    upload-sub-dir: uploads
+    post-markdown-dir: posts
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Douzhan Thoughts" />
+    <title>Douzhan Thoughts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: "var(--color-primary)",
+              "background-light": "#f8fafc", /* Lighter slate */
+              "background-dark": "#0a0c12",
+              glass: {
+                border: "rgba(255, 255, 255, 0.4)",
+                surface: "rgba(255, 255, 255, 0.1)",
+                highlight: "rgba(255, 255, 255, 0.2)"
+              }
+            },
+            fontFamily: {
+              sans: ['Manrope', 'sans-serif'],
+              display: ['Manrope', 'sans-serif'],
+            },
+            borderRadius: {
+              "xl": "1rem",
+              "2xl": "1.5rem",
+              "3xl": "2.5rem",
+            },
+            animation: {
+              'gradient-x': 'gradient-x 15s ease infinite',
+            },
+            keyframes: {
+              'gradient-x': {
+                '0%, 100%': {
+                  'background-size': '200% 200%',
+                  'background-position': 'left center'
+                },
+                '50%': {
+                  'background-size': '200% 200%',
+                  'background-position': 'right center'
+                },
+              },
+            },
+          }
+        }
+      }
+    </script>
+    <style>
+      :root {
+        /* Optimized Light Theme - Cleaner, cooler, brighter */
+        --color-primary: #195de6;   /* Default Blue */
+        --bg-primary: #f1f5f9;      /* Slate 100 */
+        --bg-secondary: #e0e7ff;    /* Indigo 50 */
+        --text-primary: #1e293b;    /* Slate 800 */
+        
+        /* High quality glass for light mode */
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(255, 255, 255, 0.4);
+        --glass-nav: rgba(255, 255, 255, 0.75);
+        --glass-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.05), 0 4px 8px -2px rgba(0, 0, 0, 0.02); /* Soft, multi-layered shadow */
+        --input-bg: rgba(255, 255, 255, 0.6);
+        
+        /* Halo colors for light mode (slightly softer) */
+        --halo-primary: rgba(25, 93, 230, 0.15);
+        --halo-secondary: rgba(124, 58, 237, 0.15);
+        --halo-accent: rgba(6, 182, 212, 0.1);
+      }
+      
+      :root.dark {
+        --color-primary: #195de6;
+        --bg-primary: #0f172a;
+        --bg-secondary: #020617;
+        --text-primary: #ffffff;
+        
+        --glass-bg: rgba(20, 25, 35, 0.4);
+        --glass-border: rgba(255, 255, 255, 0.08);
+        --glass-nav: rgba(10, 12, 18, 0.6);
+        --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+        --input-bg: rgba(255, 255, 255, 0.05);
+
+        --halo-primary: rgba(25, 93, 230, 0.3);
+        --halo-secondary: rgba(124, 58, 237, 0.3);
+        --halo-accent: rgba(6, 182, 212, 0.15);
+      }
+
+      /* Cream / Butter Theme */
+      :root.cream {
+        --color-primary: #d97706;   /* Amber 600 - Warm Caramel */
+        --bg-primary: #fffbeb;      /* Amber 50 - Warm White */
+        --bg-secondary: #fef3c7;    /* Amber 100 - Soft Cream */
+        --text-primary: #451a03;    /* Amber 950 - Deep Brown */
+        
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(251, 191, 36, 0.2); /* Amber 400 */
+        --glass-nav: rgba(255, 253, 245, 0.85);
+        --glass-shadow: 0 8px 32px -4px rgba(146, 64, 14, 0.08), 0 4px 8px -2px rgba(146, 64, 14, 0.04);
+        --input-bg: rgba(255, 255, 255, 0.7);
+
+        --halo-primary: rgba(245, 158, 11, 0.2);   /* Amber */
+        --halo-secondary: rgba(251, 146, 60, 0.2); /* Orange */
+        --halo-accent: rgba(244, 114, 182, 0.15);  /* Pink */
+      }
+      
+      /* Cream Theme Overrides for Tailwind Slate Colors */
+      :root.cream .text-slate-900 { color: #451a03 !important; } /* Deep Brown */
+      :root.cream .text-slate-800 { color: #572c0d !important; } /* Med Brown */
+      :root.cream .text-slate-700 { color: #78350f !important; } /* Lighter Brown */
+      :root.cream .text-slate-600 { color: #92400e !important; } /* Warm Clay */
+      :root.cream .text-slate-500 { color: #b45309 !important; } /* Golden Brown */
+      :root.cream .text-slate-400 { color: #d97706 !important; } /* Amber */
+      :root.cream .bg-slate-100   { background-color: rgba(255, 255, 255, 0.5) !important; }
+      :root.cream .bg-slate-50    { background-color: rgba(255, 251, 235, 0.5) !important; }
+      :root.cream .border-slate-200 { border-color: rgba(217, 119, 6, 0.15) !important; }
+
+      body {
+        font-family: 'Manrope', sans-serif;
+        background: radial-gradient(circle at 50% 0%, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        background-attachment: fixed; /* Parallax-like feel */
+        color: var(--text-primary);
+        min-height: 100vh;
+        transition: background 0.5s ease, color 0.3s ease;
+      }
+      
+      /* Liquid Glass Utilities */
+      .glass-panel {
+        background: var(--glass-bg);
+        backdrop-filter: blur(24px) saturate(160%);
+        -webkit-backdrop-filter: blur(24px) saturate(160%);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow);
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+      
+      .glass-nav {
+        background: var(--glass-nav);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow);
+        transition: all 0.4s ease;
+      }
+
+      .liquid-halo {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(100px);
+        z-index: -1;
+        pointer-events: none;
+        will-change: transform, opacity;
+        transition: background 0.5s ease;
+      }
+      
+      .halo-primary { 
+        background: var(--halo-primary); 
+        width: 800px; height: 800px; 
+        top: -25%; left: -10%; 
+      }
+      .halo-secondary { 
+        background: var(--halo-secondary); 
+        width: 600px; height: 600px; 
+        bottom: -10%; right: -5%; 
+      }
+      .halo-accent { 
+        background: var(--halo-accent); 
+        width: 500px; height: 500px; 
+        top: 40%; right: 20%; 
+      }
+
+      /* Icons */
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: rgba(150, 150, 150, 0.3); border-radius: 10px; }
+      ::-webkit-scrollbar-thumb:hover { background: rgba(150, 150, 150, 0.5); }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "framer-motion": "https://esm.sh/framer-motion@^12.33.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.40.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
