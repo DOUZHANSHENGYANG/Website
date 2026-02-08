@@ -4,10 +4,12 @@
 [![Backend](https://img.shields.io/badge/Backend-Spring%20Boot%203.3-6DB33F?logo=springboot&logoColor=white)](#技术栈)
 [![Build](https://img.shields.io/badge/Build-Vite%20%7C%20Maven-646CFF)](#构建与测试)
 [![DB](https://img.shields.io/badge/Database-SQLite-003B57?logo=sqlite&logoColor=white)](#技术栈)
+[![CI](https://github.com/DOUZHANSHENGYANG/Website/actions/workflows/ci.yml/badge.svg)](https://github.com/DOUZHANSHENGYANG/Website/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](#开源协议)
 
 一个前后端分离的博客系统，聚焦 **个人写作、内容管理、分类检索与轻量部署**。
 
+> 核心目录：`frontend/`、`backend/`，并包含 GitHub Actions 工作流配置。
 ---
 
 ## 项目亮点
@@ -152,12 +154,27 @@ npm run build
 
 ---
 
+## GitHub 工作流（已配置）
+
+### 1) CI（`.github/workflows/ci.yml`）
+- 触发：`push` 到 `main`、`pull_request` 到 `main`、手动触发
+- 内容：
+  - `frontend`：`npm ci` + `npm run build`
+  - `backend`：`mvn clean test`
+- 特点：开启并发控制，重复提交会自动取消旧任务
+
+### 2) Dependency Review（`.github/workflows/dependency-review.yml`）
+- 触发：`pull_request` 到 `main`
+- 内容：检查依赖变更中的已知风险（供应链安全）
+
+---
+
 ## Roadmap（计划中）
 
 - [ ] 增加全文搜索能力（可选 ES / SQLite FTS）
 - [ ] 增加标签系统与多维筛选
 - [ ] 增加评论与审核机制
-- [ ] 增加 CI 工作流（自动测试 + 构建校验）
+- [ ] 增加预发布环境（Preview）与自动化部署
 
 ---
 
@@ -179,6 +196,7 @@ npm run build
   - 完成前后端目录重构（`frontend/` + `backend/`）
   - 修复公共页滚动定位与头部搜索框交互
   - 完善项目 README（技术栈、功能特点、接口概览、贡献说明）
+  - 新增 GitHub Actions：CI + Dependency Review
 
 ---
 
