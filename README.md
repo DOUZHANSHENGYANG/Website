@@ -1,55 +1,96 @@
-﻿# Website · Liquid Thoughts 博客系统
+﻿# Website · Liquid Thoughts
 
-一个前后端分离的博客系统，面向**个人写作 + 后台内容管理**场景。
+[![Frontend](https://img.shields.io/badge/Frontend-React%2019%20%2B%20TypeScript-61DAFB?logo=react&logoColor=white)](#技术栈)
+[![Backend](https://img.shields.io/badge/Backend-Spring%20Boot%203.3-6DB33F?logo=springboot&logoColor=white)](#技术栈)
+[![Build](https://img.shields.io/badge/Build-Vite%20%7C%20Maven-646CFF)](#构建与测试)
+[![DB](https://img.shields.io/badge/Database-SQLite-003B57?logo=sqlite&logoColor=white)](#技术栈)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](#开源协议)
 
-## 项目说明
+一个前后端分离的博客系统，聚焦 **个人写作、内容管理、分类检索与轻量部署**。
 
-本项目包含公开访问站点与管理后台两部分能力，支持文章发布、分类管理、内容检索、点赞/浏览统计等核心功能。
+> 本仓库按当前约束仅保留：`frontend/`、`backend/`、`README.md`。
 
-> 当前仓库按你要求，仅保留：`frontend/`、`backend/`、`README.md`。
+---
+
+## 项目亮点
+
+- ✨ 前台站点：文章列表、文章详情、分类浏览、关于页
+- 🔎 分类检索：支持关键字、状态、分类、创建/更新时间区间筛选
+- 🛠 管理后台：文章/分类/站点配置管理
+- 🔐 鉴权机制：基于 JWT 的登录态管理
+- 🖼 资源上传：支持头像与内容图片上传
+- 📈 指标统计：浏览量与点赞数据记录与展示
+- 📄 文档友好：后端提供 Swagger/OpenAPI 文档
+
+---
 
 ## 目录结构
 
 ```text
 .
-├─ frontend/    # React + Vite 前端
-└─ backend/     # Spring Boot 后端
+├─ frontend/      # React + Vite 前端应用
+└─ backend/       # Spring Boot 后端服务
 ```
+
+---
 
 ## 技术栈
 
 ### Frontend
-- React 19 + TypeScript
+- React 19
+- TypeScript
 - Vite 6
-- Framer Motion（动效）
-- React Markdown + remark-gfm（Markdown 渲染）
-- Lucide React / Material Symbols（图标）
+- Framer Motion
+- React Markdown + remark-gfm
 
 ### Backend
 - Java 17
 - Spring Boot 3.3.x
 - MyBatis-Plus 3.5.x
 - SQLite
-- JWT 鉴权
+- JWT（鉴权）
 - Spring Validation
 - Swagger / OpenAPI
 
-### 工程与运行
-- Maven（后端构建）
-- npm（前端依赖管理）
-- Docker Compose（可选）
+### Engineering
+- npm（前端依赖与脚本）
+- Maven（后端构建与测试）
 
-## 功能特点
+---
 
-- ✅ 前台文章浏览、分类浏览、文章详情页
-- ✅ 分类文章检索（关键字、状态、分类、时间区间）
-- ✅ 后台登录鉴权（JWT）
-- ✅ 文章管理（新建 / 编辑 / 删除 / 状态管理）
-- ✅ 分类管理（增删改查）
-- ✅ 站点配置管理（如标题、页脚、作者信息）
-- ✅ 文件上传（图片资源、头像等）
-- ✅ 文章浏览量/点赞统计与展示
-- ✅ OpenAPI 文档可视化
+## 功能清单
+
+### 公开站点
+- 首页文章流
+- 分类页与分类内文章检索
+- 文章详情阅读与分享
+- 文章点赞/浏览统计展示
+
+### 管理后台
+- 登录/退出
+- 文章增删改查
+- 分类增删改查
+- 站点配置（标题、作者、页脚等）
+- 文件上传（图片/头像）
+
+---
+
+## 架构概览
+
+```text
+[Browser]
+    │
+    ▼
+[frontend: React + Vite]
+    │  HTTP / JSON
+    ▼
+[backend: Spring Boot REST API]
+    │
+    ├── [SQLite]
+    └── [storage/ 文件资源]
+```
+
+---
 
 ## 快速启动
 
@@ -77,7 +118,25 @@ npm run dev
 ```
 
 - 默认地址：`http://localhost:9001`
-- 默认代理后端：`http://localhost:9002`
+- 前端通过 `VITE_BACKEND_URL` 指向后端（默认 `http://localhost:9002`）
+
+---
+
+## API 概览
+
+> 详细接口请以 Swagger 为准：`/swagger-ui.html`
+
+- `POST /api/auth/login`：登录
+- `POST /api/auth/logout`：退出
+- `GET /api/auth/session`：会话状态
+- `GET /api/posts` / `GET /api/posts/page`：文章查询
+- `POST /api/posts` / `DELETE /api/posts/{id}`：文章管理
+- `GET /api/categories` / `GET /api/categories/page`：分类查询
+- `POST /api/categories` / `DELETE /api/categories/{id}`：分类管理
+- `GET /api/configs` / `POST /api/configs/{key}`：配置管理
+- `POST /api/assets/upload`：资源上传
+
+---
 
 ## 构建与测试
 
@@ -93,11 +152,40 @@ cd frontend
 npm run build
 ```
 
-## 开源协议
+---
 
-本项目采用 **MIT License** 开源。
+## Roadmap（计划中）
 
-你可以自由地使用、修改和分发本项目代码（包括商业用途），但需保留原始版权与许可声明。
+- [ ] 增加全文搜索能力（可选 ES / SQLite FTS）
+- [ ] 增加标签系统与多维筛选
+- [ ] 增加评论与审核机制
+- [ ] 增加 CI 工作流（自动测试 + 构建校验）
 
 ---
-如果你希望，我下一步可以再帮你补一版「更偏产品介绍风格」README（加截图区、架构图、Roadmap、贡献指南）。
+
+## 贡献指南
+
+欢迎提 Issue / PR。
+
+建议流程：
+1. Fork 仓库并创建功能分支
+2. 提交清晰的 commit message
+3. 本地通过构建与测试后发起 PR
+4. 在 PR 中说明变更动机、影响范围与验证方式
+
+---
+
+## 更新记录
+
+- `2026-02-08`
+  - 完成前后端目录重构（`frontend/` + `backend/`）
+  - 修复公共页滚动定位与头部搜索框交互
+  - 完善项目 README（技术栈、功能特点、接口概览、贡献说明）
+
+---
+
+## 开源协议
+
+本项目采用 **MIT License**。
+
+你可以在保留原作者版权与许可声明的前提下，自由使用、修改、分发本项目代码（包括商业用途）。
