@@ -5,7 +5,6 @@
 [![Build](https://img.shields.io/badge/Build-Vite%20%7C%20Maven-646CFF)](#构建与测试)
 [![DB](https://img.shields.io/badge/Database-SQLite-003B57?logo=sqlite&logoColor=white)](#技术栈)
 [![CI](https://github.com/DOUZHANSHENGYANG/Website/actions/workflows/ci.yml/badge.svg)](https://github.com/DOUZHANSHENGYANG/Website/actions/workflows/ci.yml)
-[![Deploy Frontend](https://github.com/DOUZHANSHENGYANG/Website/actions/workflows/deploy-vercel.yml/badge.svg)](https://github.com/DOUZHANSHENGYANG/Website/actions/workflows/deploy-vercel.yml)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](#开源协议)
 
 一个前后端分离的博客系统，聚焦 **个人写作、内容管理、分类检索与轻量部署**。
@@ -182,17 +181,24 @@ npm run build
    - `/api/*` -> `https://douzhan-api-backend-production.up.railway.app/api/*`
    - `/uploads/*` -> `https://douzhan-api-backend-production.up.railway.app/uploads/*`
 
-### 3) 自动化发布（已配置）
+### 3) 平台原生自动部署（推荐）
 
-已新增前端自动部署工作流：`.github/workflows/deploy-vercel.yml`  
-你只需要在 GitHub 仓库 Secrets 中配置：
+不依赖 GitHub Actions 发布，直接使用平台内建 Git 触发部署：
 
-- `VERCEL_TOKEN`
-- `VERCEL_ORG_ID`
-- `VERCEL_PROJECT_ID`
+- **Vercel**
+  1. 连接 GitHub 仓库 `DOUZHANSHENGYANG/Website`
+  2. Root Directory 设为 `frontend/`
+  3. Production Branch 设为 `main`
+  4. 打开 Auto Deploy（默认开启）
 
-配置后，每次 push 到 `main` 并命中 `frontend/**` 变更会自动发布到 Vercel 生产环境。
-如果 Secrets 未配置，工作流会自动跳过，不会导致 CI 失败。
+- **Railway**
+  1. 进入 `douzhan-api` 项目下的 `douzhan-api-backend` 服务
+  2. Source 重新连接 GitHub 仓库 `DOUZHANSHENGYANG/Website`
+  3. Root Directory 设为 `backend/`
+  4. 打开 Auto Deploy
+  5. 如启用 **Wait for CI**，确保 GitHub App 权限已更新并已授权仓库
+
+> 若 Railway 页面出现 “Wait for CI / 请确保已接受更新的 GitHub 权限” 提示，说明需要在 Railway 引导页中重新授权 GitHub App 后才会正常触发自动部署。
 
 ---
 
@@ -209,11 +215,6 @@ npm run build
 - 触发：`pull_request` 到 `main`
 - 内容：检查依赖变更中的已知风险（供应链安全）
 
-### 3) Deploy Frontend to Vercel（`.github/workflows/deploy-vercel.yml`）
-- 触发：`push` 到 `main`（`frontend/**` 变更）或手动触发
-- 内容：拉取 Vercel 配置、构建并发布 production
-- 依赖 Secrets：`VERCEL_TOKEN`、`VERCEL_ORG_ID`、`VERCEL_PROJECT_ID`
-
 ---
 
 ## Roadmap（计划中）
@@ -221,7 +222,7 @@ npm run build
 - [ ] 增加全文搜索能力（可选 ES / SQLite FTS）
 - [ ] 增加标签系统与多维筛选
 - [ ] 增加评论与审核机制
-- [ ] 增加后端自动化部署工作流（Railway）
+- [ ] 增加运行状态监控与错误告警
 
 ---
 
@@ -244,8 +245,7 @@ npm run build
   - 修复公共页滚动定位与头部搜索框交互
   - 完善项目 README（技术栈、功能特点、接口概览、贡献说明）
   - 新增 GitHub Actions：CI + Dependency Review
-  - 新增前端自动部署工作流（Vercel）
-  - 新增免费部署方案文档（Vercel + Railway）
+  - 新增免费部署方案文档（Vercel + Railway，平台原生自动部署）
   - 后端已部署到 Railway：`https://douzhan-api-backend-production.up.railway.app`
 
 ---
