@@ -1,4 +1,4 @@
-﻿# Website · Liquid Thoughts
+﻿# Website · Douzhan Thoughts
 
 [![Frontend](https://img.shields.io/badge/Frontend-React%2019%20%2B%20TypeScript-61DAFB?logo=react&logoColor=white)](#技术栈)
 [![Backend](https://img.shields.io/badge/Backend-Spring%20Boot%203.3-6DB33F?logo=springboot&logoColor=white)](#技术栈)
