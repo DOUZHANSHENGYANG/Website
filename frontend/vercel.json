@@ -3,11 +3,11 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://douzhan-api.up.railway.app/api/:path*"
+      "destination": "https://douzhan-api-backend-production.up.railway.app/api/:path*"
     },
     {
       "source": "/uploads/:path*",
-      "destination": "https://douzhan-api.up.railway.app/uploads/:path*"
+      "destination": "https://douzhan-api-backend-production.up.railway.app/uploads/:path*"
     }
   ]
 }

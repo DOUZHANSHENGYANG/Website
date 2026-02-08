@@ -159,7 +159,7 @@ npm run build
 
 ### 目标域名（推荐命名）
 - 前端：`douzhan-web.vercel.app`
-- 后端：`douzhan-api.up.railway.app`
+- 后端：`douzhan-api-backend-production.up.railway.app`
 
 ### 1) 部署后端到 Railway（免费层）
 
@@ -180,8 +180,8 @@ npm run build
 2. Root Directory 选择 `frontend/`  
 3. Framework 选择 Vite（通常自动识别）  
 4. 首次部署后，检查 `frontend/vercel.json` 中后端地址是否与你 Railway 域名一致：
-   - `/api/*` -> `https://douzhan-api.up.railway.app/api/*`
-   - `/uploads/*` -> `https://douzhan-api.up.railway.app/uploads/*`
+   - `/api/*` -> `https://douzhan-api-backend-production.up.railway.app/api/*`
+   - `/uploads/*` -> `https://douzhan-api-backend-production.up.railway.app/uploads/*`
 
 ### 3) 自动化发布（已配置）
 
@@ -246,6 +246,7 @@ npm run build
   - 新增 GitHub Actions：CI + Dependency Review
   - 新增前端自动部署工作流（Vercel）
   - 新增免费部署方案文档（Vercel + Railway）
+  - 后端已部署到 Railway：`https://douzhan-api-backend-production.up.railway.app`
 
 ---
 
