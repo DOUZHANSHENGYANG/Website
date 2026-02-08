@@ -119,6 +119,22 @@ npm run dev
 - 默认地址：`http://localhost:9001`
 - 前端通过 `VITE_BACKEND_URL` 指向后端（默认 `http://localhost:9002`）
 
+### 3) 一键启动（Windows）
+
+```bash
+./start-dev.bat
+```
+
+或：
+
+```bash
+powershell -ExecutionPolicy Bypass -File ./start-dev.ps1
+```
+
+可选参数：
+- `-SkipInstall`：跳过前端 `node_modules` 检查安装步骤
+- `-DryRun`：仅打印命令，不真正启动进程
+
 ---
 
 ## API 概览
