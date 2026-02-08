@@ -5,6 +5,7 @@
 [![Build](https://img.shields.io/badge/Build-Vite%20%7C%20Maven-646CFF)](#构建与测试)
 [![DB](https://img.shields.io/badge/Database-SQLite-003B57?logo=sqlite&logoColor=white)](#技术栈)
 [![CI](https://github.com/DOUZHANSHENGYANG/Website/actions/workflows/ci.yml/badge.svg)](https://github.com/DOUZHANSHENGYANG/Website/actions/workflows/ci.yml)
+[![Deploy Frontend](https://github.com/DOUZHANSHENGYANG/Website/actions/workflows/deploy-vercel.yml/badge.svg)](https://github.com/DOUZHANSHENGYANG/Website/actions/workflows/deploy-vercel.yml)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](#开源协议)
 
 一个前后端分离的博客系统，聚焦 **个人写作、内容管理、分类检索与轻量部署**。
@@ -154,6 +155,47 @@ npm run build
 
 ---
 
+## 免费部署方案（Vercel + Railway）
+
+### 目标域名（推荐命名）
+- 前端：`douzhan-web.vercel.app`
+- 后端：`douzhan-api.up.railway.app`
+
+### 1) 部署后端到 Railway（免费层）
+
+1. 在 Railway 新建项目并连接当前 GitHub 仓库  
+2. Service Root Directory 选择 `backend/`  
+3. 添加 Volume（建议挂载到 `/data`）  
+4. 配置环境变量：
+   - `BLOG_DB_PATH=/data/blog.db`
+   - `BLOG_STORAGE_PATH=/data/storage`
+   - `PORT=8080`（或其它端口，应用已支持 `${PORT}`）
+5. 生成 Public Domain，尽量使用包含 `douzhan` 的名称
+
+> 本项目已支持 PaaS 端口注入：`server.port: ${PORT:9002}`。
+
+### 2) 部署前端到 Vercel（免费层）
+
+1. 在 Vercel 导入此仓库  
+2. Root Directory 选择 `frontend/`  
+3. Framework 选择 Vite（通常自动识别）  
+4. 首次部署后，检查 `frontend/vercel.json` 中后端地址是否与你 Railway 域名一致：
+   - `/api/*` -> `https://douzhan-api.up.railway.app/api/*`
+   - `/uploads/*` -> `https://douzhan-api.up.railway.app/uploads/*`
+
+### 3) 自动化发布（已配置）
+
+已新增前端自动部署工作流：`.github/workflows/deploy-vercel.yml`  
+你只需要在 GitHub 仓库 Secrets 中配置：
+
+- `VERCEL_TOKEN`
+- `VERCEL_ORG_ID`
+- `VERCEL_PROJECT_ID`
+
+配置后，每次 push 到 `main` 并命中 `frontend/**` 变更会自动发布到 Vercel 生产环境。
+
+---
+
 ## GitHub 工作流（已配置）
 
 ### 1) CI（`.github/workflows/ci.yml`）
@@ -167,6 +209,11 @@ npm run build
 - 触发：`pull_request` 到 `main`
 - 内容：检查依赖变更中的已知风险（供应链安全）
 
+### 3) Deploy Frontend to Vercel（`.github/workflows/deploy-vercel.yml`）
+- 触发：`push` 到 `main`（`frontend/**` 变更）或手动触发
+- 内容：拉取 Vercel 配置、构建并发布 production
+- 依赖 Secrets：`VERCEL_TOKEN`、`VERCEL_ORG_ID`、`VERCEL_PROJECT_ID`
+
 ---
 
 ## Roadmap（计划中）
@@ -174,7 +221,7 @@ npm run build
 - [ ] 增加全文搜索能力（可选 ES / SQLite FTS）
 - [ ] 增加标签系统与多维筛选
 - [ ] 增加评论与审核机制
-- [ ] 增加预发布环境（Preview）与自动化部署
+- [ ] 增加后端自动化部署工作流（Railway）
 
 ---
 
@@ -197,6 +244,8 @@ npm run build
   - 修复公共页滚动定位与头部搜索框交互
   - 完善项目 README（技术栈、功能特点、接口概览、贡献说明）
   - 新增 GitHub Actions：CI + Dependency Review
+  - 新增前端自动部署工作流（Vercel）
+  - 新增免费部署方案文档（Vercel + Railway）
 
 ---
 

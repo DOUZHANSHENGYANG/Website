@@ -10,11 +10,11 @@ export default defineConfig(({ mode }) => {
         host: '0.0.0.0',
         proxy: {
           '/api': {
-            target: env.VITE_BACKEND_URL || 'http://localhost:8080',
+            target: env.VITE_BACKEND_URL || 'http://localhost:9002',
             changeOrigin: true
           },
           '/uploads': {
-            target: env.VITE_BACKEND_URL || 'http://localhost:8080',
+            target: env.VITE_BACKEND_URL || 'http://localhost:9002',
             changeOrigin: true
           }
         }
